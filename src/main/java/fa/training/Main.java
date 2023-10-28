@@ -1,35 +1,36 @@
 package fa.training;
 
 import fa.training.entity.Department;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import org.hibernate.Session;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class Main {
   public static void main(String[] args) {
 
-    try (var entityManagerFactory = Persistence.createEntityManagerFactory("hibernate-caching");
-        var em = entityManagerFactory.createEntityManager()) {
-      EntityTransaction transaction = em.getTransaction();
-      try {
-        transaction.begin();
+    try (var registry = new StandardServiceRegistryBuilder().build();
+         var sessionFactory = new MetadataSources(registry)
+             .addAnnotatedClass(Department.class)
+             .buildMetadata().buildSessionFactory()) {
 
-        var dep = em.find(Department.class, 1);
-        System.out.println(dep.getDeptName());
+      sessionFactory.inTransaction(Main::doInSession);
 
-        var dep2 = em.find(Department.class, 1);
-        System.out.println(dep2.getDeptName());
-
-        for (int i = 0; i < 10; i++) {
-          System.out.println(em.find(Department.class, 1).getDeptName());
-        }
-
-        transaction.commit();
-      } catch (Exception e) {
-        if (transaction.isActive()) {
-          transaction.rollback();
-        }
-        throw e;
-      }
     }
+  }
+
+  private static void doInSession(Session session) {
+
+    // Do your logic here
+
+    var dep = session.find(Department.class, 1);
+    System.out.println(dep.getDeptName());
+
+    var dep2 = session.find(Department.class, 1);
+    System.out.println(dep2.getDeptName());
+
+    for (int i = 0; i < 10; i++) {
+      System.out.println(session.find(Department.class, 1).getDeptName());
+    }
+
   }
 }
