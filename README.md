@@ -3,7 +3,7 @@
 1. Set up docker.
 2. Start local DB:
     ```shell
-    docker compose up -d db
+   cd db && docker compose up -d db
     ```
 3. Start the Main class.
 
