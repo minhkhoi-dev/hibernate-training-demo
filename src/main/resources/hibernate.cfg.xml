@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/example</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">example</property>
+
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.highlight_sql">true</property>
+
+
+
+    <property name="cache.use_second_level_cache">true</property>
+    <property name="hibernate.generate_statistics">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+
+    <property name="hibernate.cache.region.factory_class">jcache</property>
+    <property name="hibernate.hibernate.javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</property>
+    <property name="hibernate.javax.cache.uri">ehcache.xml</property>
+    <!-- Entity mapping-->
+    <mapping class="fa.training.entity.Department"/>
+
+  </session-factory>
+</hibernate-configuration>

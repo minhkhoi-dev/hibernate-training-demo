@@ -1,13 +1,12 @@
 package fa.training.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name = "departments")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Department {
 
   @Id
@@ -32,5 +31,13 @@ public class Department {
 
   public void setDeptName(String deptName) {
     this.deptName = deptName;
+  }
+
+  @Override
+  public String toString() {
+    return "Department{" +
+        "id=" + id +
+        ", deptName='" + deptName + '\'' +
+        '}';
   }
 }
