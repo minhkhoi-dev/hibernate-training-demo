@@ -13,7 +13,6 @@
     <property name="hibernate.highlight_sql">true</property>
 
 
-
     <property name="cache.use_second_level_cache">true</property>
     <property name="cache.use_query_cache">true</property>
     <property name="hibernate.generate_statistics">true</property>
