@@ -15,6 +15,7 @@
 
 
     <property name="cache.use_second_level_cache">true</property>
+    <property name="cache.use_query_cache">true</property>
     <property name="hibernate.generate_statistics">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
 
@@ -23,6 +24,7 @@
     <property name="hibernate.javax.cache.uri">ehcache.xml</property>
     <!-- Entity mapping-->
     <mapping class="fa.training.entity.Department"/>
+    <mapping class="fa.training.entity.Employee"/>
 
   </session-factory>
 </hibernate-configuration>
