@@ -1,6 +1,7 @@
 package fa.training;
 
 import fa.training.entity.Department;
+import fa.training.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -15,6 +16,7 @@ public class Main {
         .build();
          var sessionFactory = new MetadataSources(registry)
              .addAnnotatedClass(Department.class)
+                 .addAnnotatedClass(Employee.class)
              .buildMetadata().buildSessionFactory()) {
 
       sessionFactory.inTransaction(Main::doWithSession);

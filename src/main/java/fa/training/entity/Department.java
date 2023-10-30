@@ -1,6 +1,17 @@
 package fa.training.entity;
 
-import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import jakarta.persistence.Cacheable;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
@@ -16,6 +27,10 @@ public class Department {
 
   @Column(name = "dept_name")
   private String deptName;
+
+  @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+  @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+  private List<Employee> employeeList = new ArrayList<>();
 
   public Integer getId() {
     return id;
@@ -33,11 +48,27 @@ public class Department {
     this.deptName = deptName;
   }
 
+  public List<Employee> getEmployeeList() {
+    return employeeList;
+  }
+
+  public void setEmployeeList(List<Employee> employeeList) {
+    this.employeeList = employeeList;
+  }
+
   @Override
   public String toString() {
+    if (employeeList.isEmpty()) {
+      return "Department{" +
+              "id=" + id +
+              ", deptName='" + deptName + '\'' +
+              '}';
+    }
+
     return "Department{" +
-        "id=" + id +
-        ", deptName='" + deptName + '\'' +
-        '}';
+            "id=" + id +
+            ", deptName='" + deptName + '\'' +
+            ", employees='" + Arrays.toString(employeeList.toArray()) + "'" +
+            '}';
   }
 }
