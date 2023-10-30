@@ -18,7 +18,8 @@ dependencies {
     implementation 'org.hibernate.orm:hibernate-core'
     implementation 'jakarta.transaction:jakarta.transaction-api'
 
-    implementation 'org.postgresql:postgresql:42.6.0'
+    // JDBC Driver
+    implementation 'com.microsoft.sqlserver:mssql-jdbc:12.4.1.jre11'
 
     // L2C with Jcache
     implementation 'org.hibernate.orm:hibernate-jcache:6.3.1.Final'

@@ -1,15 +1,24 @@
-version: '3.1'
+version: '3.7'
 
 services:
 
   db:
-    image: postgres
+    container_name: MSSQL-2019
+    build:
+      context: .
     restart: always
     environment:
-      POSTGRES_PASSWORD: example
-      POSTGRES_DB: example
-      POSTGRES_INITDB_ARGS: '--encoding=UTF-8'
+      ACCEPT_EULA: 1
+      MSSQL_USER: sa
+      MSSQL_SA_PASSWORD: 'Strong(!)Pass'
+      TZ: Asia/Ho_Chi_Minh
     ports:
-      - "5432:5432"
+      - "1433:1433"
     volumes:
       - './init:/docker-entrypoint-initdb.d'
+    healthcheck:
+      test: cat /var/log/docker/sqlserver_db_init.log | grep [db_init_completed]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
