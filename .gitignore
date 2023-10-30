@@ -5,9 +5,8 @@ build/
 !**/src/test/**/build/
 
 ### IntelliJ IDEA ###
-.idea/
-!**/src/main/**/out/
-!**/src/test/**/out/
+.idea
+out
 
 ### Mac OS ###
 .DS_Store

@@ -29,7 +29,12 @@ public class Main {
     System.out.println(dep2.getDeptName());
 
     for (int i = 0; i < 10; i++) {
-      System.out.println(session.find(Department.class, 1).getDeptName());
+      if (i < 5) {
+        System.out.println(session.find(Department.class, i + 1));
+      } else {
+        System.out.println(session.find(Department.class, 1));
+      }
+
     }
 
   }
