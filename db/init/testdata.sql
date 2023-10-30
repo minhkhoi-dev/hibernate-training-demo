@@ -1,4 +1,4 @@
-drop table public.departments;
+drop table if exists public.departments;
 create table public.departments
 (
     dept_id   integer not null
